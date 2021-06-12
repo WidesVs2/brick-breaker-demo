@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Demo Brick breaker game built with vanilla javascript">
+    <meta name="author" content="Micheal Ogden">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Game</title>
+    <script src="https://kit.fontawesome.com/131a82aa8d.js" crossorigin="anonymous"></script>
+    <title>Brick Breaker Demo</title>
 </head>
 <body>
+    <!-- Load in assets -->
     <img id="ball-left" src="./assets/sprites/ball-left.png" alt="ball-left">
     <img id="ball-right" src="./assets/sprites/ball-right.png" alt="ball-right">
     <img id="brick-base" src="./assets/sprites/brick-base.png" alt="brick-base">
@@ -16,10 +20,98 @@
     <img id="brick-broken" src="./assets/sprites/brick-broken.png" alt="brick-broken">
     <img id="brick-crack" src="./assets/sprites/brick-crack.png" alt="brick-crack">
     <img id="brick-light" src="./assets/sprites/brick-light.png" alt="brick-light">
-    <h1>Ball Crush</h1>
+    <img id="ex-brick" src="./assets/sprites/ex-up-brick.png" alt="ex-brick">
+    <audio loop id='bg-music' preload="auto" controls="none" style="display: none;" src="./assets//audio/bg/Techno-Gameplay_Looping.mp3"></audio>
+    <audio id="explosion" preload="auto" controls="none" style="display: none;" src="./assets/audio/sfx/Explosion8.mp3"></audio>
+    <audio id="powerup-one" preload="auto" controls="none" style="display: none;" src="./assets/audio/sfx/PowerUp18.mp3"></audio>
+    <audio id="powerup-two" preload="auto" controls="none" style="display: none;" src="./assets/audio/sfx/PowerUp19.mp3"></audio>
+    <audio id="robot" preload="auto" controls="none" style="display: none;" src="./assets/audio/sfx/Robot-Footstep_8.mp3"></audio>
+    <audio id="creepy-piano" preload="auto" controls="none" style="display: none;" src="./assets/audio/sfx/Creepy-Piano-FX_2.mp3"></audio>
+    <audio id="chime" preload="auto" controls="none" style="display: none;" src="./assets/audio/sfx/SynthChime1.mp3"></audio>
+    <!-- End Assets -->
+
+
+    <!-- Version Header -->
+    <h1 id="version">ALPHA VERSION 0.0.2</h1>
     
+    <!-- Game Canvas -->
     <canvas id="gameScreen"></canvas>
+
+    <!-- Start true html content -->
+    <img src="./assets/images/brick-breaker-logo.png" alt="brick breaker logo words with controller" class="img-shown">
+    <hr>
+
+    <!-- Welcome Section -->
+    <section id="welcome">
+        <h3 id="welcome-header">Thanks for playing!</h3>
+        <p class="lead">I'm using this as a demonstration / proving grounds for javascript coding ability. I hope you've enjoyed playing this simple brick breaker as much as I enjoyed creating it. If you discover obvious glithces or nasty bugs, two things to remeber...</p>
+        <ul>
+            <li>Those aren't bugs, they're features...</li>
+            <li>Wreck it Ralph taught us to cherish glitches...</li>
+            <li>And yeah, I'll see myself out... <i class="fas fa-walking"></i></li>
+        </ul>
+        <p class="lead">As time progresses, I'll be adding more and more features and cleaning up problems. As such, please consider this an alpha version. Some variance is to be expected at this stage of development.</p>
+        <p class="lead">Thanks again for playing my game, have a great time!</p>
+    </section>
+
+    <!-- Release notes Section, contains current notes and upcoming features -->
+    <section id="release-notes">
+        <h3 id="release=header">Version 0.0.2</h3>
+        <img class="img-shown" src="./assets/images/bouncing-ball.gif" alt="bouncing red ball gif">
+        <hr>
+        <p class="lead">This version saw some interesting improvements over the base game. Most importantly, this game is fully mobile responsive! Also the UI was updated to be more lively and interesting. Finally, some core funtionality was added, such as score keeping, extra lives, and music and SFX. If interested in the code behind the madness, or well, the madness behind the code anyways, feel free to take a look on <a href="https://github.com/WidesVs2/brick-breaker-demo" referrerpolicy="noreferrer" target="_blank">Github.</a></p>
+        <ul>Added Feature List:
+            <li>Mobile Responsive App- Now fully playable on mobile!</li>
+            <li>Add buttons for use on mobile: left, right, start, and pause, only visible on smaller devices. Resize your browser window for demo.</li>
+            <li>Add actual score mechanism, no longer simply tracking remaining bricks.</li>
+            <li>Add combo multiplier for increased points after successive breaks.</li>
+            <li>Add ball speed modifier that slightly increases ball speed as levels are beaten.</li>
+            <li>Add extra life mechanism, one chance for an extra life each level.</li>
+            <li>Add extra life display graphic, updated base block image to a special powerup image.</li>
+            <li>Increased number of generated levels, Max Level is now 50!</li>
+            <li>Add new level gamestate allowing for players to catch their breath before starting a new level.</li>
+            <li>Improved collision detection and ball redirection.</li>
+            <li>Slight increase to ball size and reformating block layout.</li>
+            <li>Made canvas element's background colorful and dynamic</li>
+            <li>Add SFX and background music.</li>
+            <li>Add brick break animations</li>
+            <li>Add timing functions for certain actions, a.k.a., pick up extra life within a time limit.</li>
+        </ul>
+        <p class="lead">I'm continuing to work on this app in my free time. I intend to round out some more features, refine current capabilities, and possibly even deploy a mobile specific version to the play store || app store.</p>
+        <img src="./assets/images/calendar.jpg" alt="calendar clip art" class="img-shown">
+        <ul>Upcoming Features! Release Date: TBD
+            <li>Multiple Ball Booster</li>
+            <li>Multi hit bricks</li>
+            <li>New level generation to add specific layouts to challenge players</li>
+            <li>Further refinement of collision detection and game functions.</li>
+        </ul>
+    </section>
+
+    <!-- Credits Section -->
+    <section id="credits">
+        <h3>Credits</h3>
+        <img src="./assets/images/the-credits.png" alt="film take marker with the credits written" class="img-shown">
+        <p class="lead">A lot of people deserve thanks for their help. First, to my loving and wonderful wife, Amanda. You've stuck by me through some real crap, and it's only because of your encouragement that I ever accomplish anything. I love you Darling! Second, <a href="https://chrisperko.net" referrerpolicy="noreferrer" target="_blank">Chris Perko</a> from <a href="https://www.freecodecamp.org" referrerpolicy="noreferrer" target="_blank">FreeCodeCamp.org</a>, who created the base tutorial I followed to get started. Most of what I had done in Version 0.0.1 came from this tutorial. Thanks for making such an awesome course! Look it up <a href="https://www.youtube.com/watch?v=3EMxBkqC4z0" referrerpolicy="noreferrer" target="_blank">HERE</a>. Thirdly, thanks to all my friends who were the very first testers of this game. You guys really pushed me to make this more than just a finished tutorial. Thanks guys! Lastly, there are a couple of creators that I used resources from that deserve their due.</p>
+        <ul>Resources:
+            <li>Sounds: Eric Matyas from <a href="https://soundimage.org/" referrerpolicy="noreferrer" target="_blank">soundimage.org</a></li>
+            <li>Images: Images were drawn by me, however my artistic ability is pretty much zilch, so the real credit goes to the creators of <a href="https://www.pixilart.com/" referrerpolicy="noreferrer" target="_blank">pixilart.com</a> for creating such an easy to use Pixel Art creator.</li>
+        </ul>
+    </section>
+
+    <!-- Footer for bottom of page -->
+    <footer>
+        <div><a href="http://www.mike-ogden.com" referrerpolicy="noreferrer" target="_blank">My Portfolio</a></div>
+        <p><small>&copy;2021 WidesVs2</small></p>
+    </footer>
+
+    <!-- Buttons for small device use, visibility toggled by class addition in index.js -->
+    <button class="btn btn-green" id="left"><i class="fas fa-chevron-circle-left"></i></button>
+    <button class="btn btn-green" id="right"><i class="fas fa-chevron-circle-right"></i></button>
+    <button class="btn btn-green" id="pause"><i class="fas fa-pause-circle"></i></button>
+    <button class="btn btn-green" id="start"><i class="fas fa-play-circle"></i></button>
+    <button class="btn btn-green" id="refresh"><i class="fas fa-redo"></i></button>
     
+    <!-- Bring in index.js to run full game script -->
     <script type="module" src="./js/index.js"></script>
 </body>
 </html>

@@ -33,7 +33,7 @@ export function detectCollisionX(ball, gameObject) {
     leftSideOfBall <= rightSideOfObject &&
     ball.position.y >= topOfObject &&
     ball.position.y + ball.size <= bottomOfObject
-    ) {
+  ) {
     return true
   } else {
     return false
@@ -60,7 +60,8 @@ export function detectCollisionPaddleSpecific(ball, gameObject) {
     ball.position.x + ball.size <= rightSideOfObject
   ) {
     if (
-      (ball.position.x <= quadBTop - ball.size && ball.position.x >= quadATop) ||
+      (ball.position.x <= quadBTop - ball.size &&
+        ball.position.x >= quadATop) ||
       (ball.position.x >= quadCTop + gameObject.width / 4 &&
         ball.position.x + ball.size <= rightSideOfObject)
     ) {

@@ -1,4 +1,7 @@
-import { detectCollisionY, detectCollisionPaddleSpecific } from "./collisionDetection.js"
+import {
+  detectCollisionY,
+  detectCollisionPaddleSpecific,
+} from "./collisionDetection.js"
 
 export default class Ball {
   constructor(game) {
@@ -10,12 +13,15 @@ export default class Ball {
 
     this.game = game
 
-    this.size = 25
+    this.collisionSFX = document.getElementById("robot")
+    this.dieSFX = document.getElementById("chime")
+
+    this.size = 28
     this.reset()
   }
 
   reset() {
-    this.position = { x: 25, y: 400 }
+    this.position = { x: this.gameWidth / 2 - 100, y: 450 }
     this.speed = { x: 4, y: -4 }
   }
 
@@ -45,29 +51,52 @@ export default class Ball {
 
     // Wall on Left or Right
     if (this.position.x + this.size > this.gameWidth || this.position.x < 0) {
+      this.collisionSFX.pause()
       this.speed.x = -this.speed.x
+      this.game.comboCount = 0
+      this.game.collisionCount++
+      this.collisionSFX.play()
     }
 
     // Wall on Top
     if (this.position.y < 0) {
+      this.collisionSFX.pause()
       this.speed.y = -this.speed.y
+      this.game.comboCount = 0
+      this.game.collisionCount++
+      this.collisionSFX.play()
     }
 
     // Bottom of game
     if (this.position.y + this.size > this.gameHeight) {
+      this.dieSFX.pause()
       this.game.lives--
+      this.game.comboCount = 0
+      this.game.comboMult = 1
       this.reset()
+      this.game.collisionCount = 0
+      this.dieSFX.play()
     }
 
     // Check collision with paddle
 
     if (detectCollisionY(this, this.game.paddle)) {
+      this.collisionSFX.pause()
       this.speed.y = -this.speed.y
       this.position.y = this.game.paddle.position.y - this.size
+      this.game.comboCount = 0
+      this.game.collisionCount = 0
+      this.game.comboMult = 1
+      this.collisionSFX.play()
     }
 
     if (detectCollisionPaddleSpecific(this, this.game.paddle)) {
+      this.collisionSFX.pause()
       this.speed.x = -this.speed.x
+      this.game.comboCount = 0
+      this.game.collisionCount = 0
+      this.game.comboMult = 1
+      this.collisionSFX.play()
     }
   }
 }

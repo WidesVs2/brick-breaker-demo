@@ -8,6 +8,9 @@ yarn-error.log*
 # netlify files
 .netlify/
 
+# Project notes
+notes/
+
 # Runtime data
 pids
 *.pid

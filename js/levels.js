@@ -2,15 +2,14 @@ import Brick from "./Brick.js"
 
 export function buildLevel(game, level) {
   let bricks = []
-  
+
   level.forEach((row, rowIndex) => {
     row.forEach((brick, brickIndex) => {
       if (brick === 1) {
         let position = {
           x: 25 + 75 * brickIndex,
-          y: 50 + 45 * rowIndex,
+          y: 50 + 60 * rowIndex,
         }
-
         bricks.push(new Brick(game, position))
       }
     })
@@ -52,7 +51,6 @@ export function generateLevel(rows, cols) {
     }
     arr2.push(arr1)
   }
-
   return arr2
 }
 
